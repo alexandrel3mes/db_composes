@@ -16,8 +16,8 @@ services:
         volumes: # Don't forget to change the volume here
           - /home/dev_backend_1/Documentos/projetos/docker/mysql:/var/lib/mysql
         environment:
-          - MYSQL_DATABASE=dbportal
-          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=dbportal # Choose your default db here
+          - MYSQL_ROOT_PASSWORD=root # Choose your password here (or erase if your want)
         networks:
           - my_network
 
@@ -38,14 +38,14 @@ services:
       volumes: # Don't forget to change the volume here
           - /home/dev_backend_1/Documentos/projetos/docker/mongo/.data:/data/db
       environment:
-        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_USERNAME: root # Choose mongo credentials here
         MONGO_INITDB_ROOT_PASSWORD: root
 
     postgres:
       container_name: postgres_container
       image: postgres
       environment:
-        POSTGRES_USER: ${POSTGRES_USER:-postgres}
+        POSTGRES_USER: ${POSTGRES_USER:-postgres} # Choose postgres credentials here
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
         PGDATA: /data/postgres
       volumes:
