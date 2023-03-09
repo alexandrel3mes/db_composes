@@ -1,0 +1,77 @@
+version: '3'
+
+networks:
+    my_network:
+      driver: bridge
+
+services:
+    mysql:
+        image: mysql:8.0
+        command: --innodb-use-native-aio=0
+        container_name: mysql
+        restart: always
+        tty: true
+        ports:
+          - "3306:3306"
+        volumes: # Don't forget to change the volume here
+          - /home/dev_backend_1/Documentos/projetos/docker/mysql:/var/lib/mysql
+        environment:
+          - MYSQL_DATABASE=dbportal
+          - MYSQL_ROOT_PASSWORD=root
+        networks:
+          - my_network
+
+    redis:
+        image: redis:alpine
+        container_name: redis
+        ports:
+          - "6379:6379"
+        networks:
+          - my_network
+
+    mongo:
+      image: mongo
+      container_name: mongo
+      restart: always
+      ports:
+          - "27017:27017"
+      volumes: # Don't forget to change the volume here
+          - /home/dev_backend_1/Documentos/projetos/docker/mongo/.data:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+
+    postgres:
+      container_name: postgres_container
+      image: postgres
+      environment:
+        POSTGRES_USER: ${POSTGRES_USER:-postgres}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+        PGDATA: /data/postgres
+      volumes:
+        - postgres:/data/postgres
+      ports:
+        - "5432:5432"
+      networks:
+        - my_network
+      restart: unless-stopped
+  
+    pgadmin:
+      container_name: pgadmin_container
+      image: dpage/pgadmin4
+      environment:
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+        PGADMIN_CONFIG_SERVER_MODE: 'False'
+      volumes:
+        - pgadmin:/var/lib/pgadmin
+
+      ports:
+        - "${PGADMIN_PORT:-5050}:80"
+      networks:
+        - my_network
+      restart: unless-stopped
+
+volumes:
+    postgres:
+    pgadmin:
