@@ -1,5 +1,5 @@
 # DB Compose
-###### This compose runs instance of 
+## This compose runs instance of:
 
 - MySQL
 - Redis
@@ -11,15 +11,18 @@ You can either run the docker commands (if you're into docker) or follow the tut
 
 ### Add permissions to bash file commands:
 
-```sudo chmod u+x up.sh && chmod u+x down.sh
+```
+sudo chmod u+x up.sh && chmod u+x down.sh
 ```
 
 ### Run docker-compose up
 
-```./up.sh
+```
+./up.sh
 ```
 
 ### Run docker-compose down
 
-```./down.sh
+```
+./down.sh
 ```
