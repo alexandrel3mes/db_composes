@@ -1,12 +1,12 @@
-# DB Compose
-## This compose runs instance of:
+# DB Compose 🐋
+## This compose runs instances of: 💾
 
 - MySQL
 - Redis
 - Postgres
 - MongoDB
 
-## How to run this compose.
+## How to run this compose. 🗂️
 You can either run the docker commands (if you're into docker) or follow the tutorial below:
 
 ### Add permissions to bash file commands:
